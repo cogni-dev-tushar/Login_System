@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'CustomButtons.dart';
+import 'LoginPage.dart';
+import 'RegisterPage.dart';
 
 void main() => runApp(const MyApp());
 
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xff2C2C2C),
         appBarTheme: const AppBarTheme(
           color: Color(0xff1DAA61),
           centerTitle: true,
@@ -23,70 +25,44 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
+
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff2C2C2C),
-      appBar: AppBar(
-        title: const Text('WELCOME'),
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        indicatorColor: Colors.amber,
+        selectedIndex: currentPageIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(Icons.login),
+            icon: Icon(Icons.login_outlined),
+            label: 'Login',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.app_registration),
+            icon: Icon(Icons.app_registration_outlined),
+            label: 'Register',
+          ),
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const BannerImage(),
-            SizedBox(height: 20.0),
-
-
-
-
-
-            Container(
-                                                        decoration: BoxDecoration(
-                                                          color: Colors.red,
-                                                          borderRadius: BorderRadius.circular(8.0)
-                                                        ),
-
-              child: Column(
-                children: [
-                  PrimaryButton(
-                    text: 'Log In',
-                    onPressed: () {},
-                  ),
-                  const SizedBox(height: 20.0),
-                  SecondaryButton(
-                    text: 'Register',
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ),
-
-
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class BannerImage extends StatelessWidget {
-  const BannerImage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.shortestSide * 0.55,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(
-          image: AssetImage('assets/images/Welcome Screen Banner.png'),
-          fit: BoxFit.fitHeight,
-        ),
-      ),
+      body: <Widget>[
+        LoginPage(),
+        RegisterPage(),
+      ][currentPageIndex],
     );
   }
 }
