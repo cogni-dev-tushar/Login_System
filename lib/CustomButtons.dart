@@ -16,13 +16,17 @@ class PrimaryButton extends StatelessWidget {
       onPressed: () {},
       child: Text(
         text,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.black),
       ),
       style: ButtonStyle(
-        elevation: MaterialStatePropertyAll(5.0),
-        backgroundColor: MaterialStatePropertyAll(Color(0xff1DAA61)),
-        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0))),
-
+        elevation: MaterialStatePropertyAll(4.0),
+        backgroundColor: MaterialStatePropertyAll(Color(0xff1DAA61)),    //Color(0xff1DAA61)
+        shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        ),
+        minimumSize: MaterialStatePropertyAll(
+          Size(MediaQuery.of(context).size.shortestSide * 0.55, 45.0),
+        ),
       ),
     );
   }
@@ -42,7 +46,20 @@ class SecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {},
-      child: Text(text),
+      child: Text(
+        text,
+        style: TextStyle(color: Color(0xff1DAA61)),    //
+      ),
+      style: ButtonStyle(
+        elevation: MaterialStatePropertyAll(2.0),
+        backgroundColor: MaterialStatePropertyAll(Color(0xff2C2C2C)),
+        shape: MaterialStatePropertyAll(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0))),
+        side: MaterialStatePropertyAll(BorderSide(width: 1.0, color: Color(0xff1DAA61))),
+        minimumSize: MaterialStatePropertyAll(
+          Size(MediaQuery.of(context).size.shortestSide * 0.55, 45.0),
+        ),
+      ),
     );
   }
 }

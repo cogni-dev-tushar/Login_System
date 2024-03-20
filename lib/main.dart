@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'CustomButtons.dart';
 
@@ -9,17 +10,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          color: Colors.greenAccent,
+        appBarTheme: const AppBarTheme(
+          color: Color(0xff1DAA61),
           centerTitle: true,
           elevation: 3.0,
         ),
-        textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white)
-        ),
       ),
-      home: WelcomePage(),
+      home: const WelcomePage(),
     );
   }
 }
@@ -30,25 +29,62 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff2C2C2C),
+      backgroundColor: const Color(0xff2C2C2C),
       appBar: AppBar(
-        title: Text('Welcome'),
+        title: const Text('WELCOME'),
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Welcome Page!!'),
-            SizedBox(height: 10.0),
-            PrimaryButton(
-              text: 'Log In',
-              onPressed: () {},
+            const BannerImage(),
+            SizedBox(height: 20.0),
+
+
+
+
+
+            Container(
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.red,
+                                                          borderRadius: BorderRadius.circular(8.0)
+                                                        ),
+
+              child: Column(
+                children: [
+                  PrimaryButton(
+                    text: 'Log In',
+                    onPressed: () {},
+                  ),
+                  const SizedBox(height: 20.0),
+                  SecondaryButton(
+                    text: 'Register',
+                    onPressed: () {},
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 10.0),
-            SecondaryButton(
-              text: 'Regester',
-              onPressed: () {},
-            ),
+
+
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class BannerImage extends StatelessWidget {
+  const BannerImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.shortestSide * 0.55,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          image: AssetImage('assets/images/Welcome Screen Banner.png'),
+          fit: BoxFit.fitHeight,
         ),
       ),
     );
